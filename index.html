@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030714" />
+    <meta name="description" content="Portfólio de Seu Nome" />
+    <title>Seu Nome — Portfólio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="welcome-screen" id="welcome-screen" aria-label="Tela de boas-vindas">
+      <canvas id="waves" aria-hidden="true"></canvas>
+      <div class="grain" aria-hidden="true"></div>
+
+      <section class="welcome-content">
+        <p class="eyebrow"><span></span> PORTFÓLIO 2026</p>
+        <h1>
+          Bem-vindo ao meu<br />
+          <strong>portfólio.</strong>
+        </h1>
+        <p class="subtitle">Ideias transformadas em experiências digitais.</p>
+
+        <div class="loader" role="status" aria-live="polite">
+          <div class="loader-label"><span>Carregando</span><span id="progress-value">0%</span></div>
+          <div class="track"><div class="progress" id="progress"></div></div>
+        </div>
+      </section>
+
+      <p class="corner-note">SEU NOME <span>·</span> DESIGN &amp; DESENVOLVIMENTO</p>
+    </main>
+
+    <section class="portfolio-placeholder" id="portfolio" aria-hidden="true">
+      <p>SEU NOME</p>
+      <h2>Portfólio em breve.</h2>
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
