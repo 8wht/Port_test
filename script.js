@@ -8,6 +8,8 @@ const themeToggle = document.querySelector('#theme-toggle');
 const backToTop = document.querySelector('#back-to-top');
 const cursor = document.querySelector('#site-cursor');
 const kineticTitle = document.querySelector('#kinetic-title');
+const kineticLetters = [...kineticTitle.querySelectorAll('.kinetic-letter')];
+const kineticDot = kineticTitle.querySelector('.kinetic-dot');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const loadingDuration = 7000;
@@ -74,6 +76,30 @@ window.addEventListener('pointermove', (event) => {
   cursor.classList.add('is-visible');
   kineticTitle.style.setProperty('--mx', ((x - .5) * 2).toFixed(3));
   kineticTitle.style.setProperty('--my', ((y - .5) * 2).toFixed(3));
+
+  const titleBounds = kineticTitle.getBoundingClientRect();
+  const insideTitle = event.clientX > titleBounds.left - 90 &&
+    event.clientX < titleBounds.right + 90 &&
+    event.clientY > titleBounds.top - 100 &&
+    event.clientY < titleBounds.bottom + 100;
+
+  kineticLetters.forEach((letter) => {
+    const bounds = letter.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const distance = Math.hypot(event.clientX - centerX, (event.clientY - centerY) * 1.35);
+    const strength = insideTitle ? Math.max(0, 1 - distance / 240) : 0;
+    letter.style.setProperty('--scale-x', (1 + strength * .09).toFixed(3));
+    letter.style.setProperty('--scale-y', (1 + strength * .38).toFixed(3));
+    letter.style.setProperty('--lift', (strength * 15).toFixed(2));
+    letter.style.setProperty('--layer', Math.round(strength * 10 + 1));
+  });
+
+  const dotBounds = kineticDot.getBoundingClientRect();
+  const dotDistance = Math.hypot(event.clientX - dotBounds.left, event.clientY - dotBounds.top);
+  const dotStrength = insideTitle ? Math.max(0, 1 - dotDistance / 180) : 0;
+  kineticDot.style.setProperty('--dot-scale', (1 + dotStrength * .45).toFixed(3));
+  kineticDot.style.setProperty('--dot-lift', (dotStrength * 10).toFixed(2));
 });
 
 document.querySelectorAll('[data-cursor]').forEach((element) => {
