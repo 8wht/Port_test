@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#030711" />
-    <meta name="description" content="Portfólio de white — experiências digitais e desenvolvimento criativo." />
-    <title>white — Portfólio</title>
+    <meta name="theme-color" content="#f2f0e9" />
+    <meta name="description" content="Portfólio de white — projetos, experimentos e experiências digitais." />
+    <title>white — arquivo pessoal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -18,71 +18,127 @@
       </video>
       <div class="loader-shade" aria-hidden="true"></div>
       <div class="grain" aria-hidden="true"></div>
-
       <header class="loader-header">
         <p class="loader-brand"><span>W/</span> WHITE</p>
         <p>PORTFÓLIO · 2026</p>
       </header>
-
       <div class="loader-copy">
         <p class="loader-kicker"><span></span> Preparando a experiência</p>
         <h1>Movimento<br /><em>vira ideia.</em></h1>
       </div>
-
       <div class="loader-status" role="status" aria-live="polite">
-        <div class="loader-label">
-          <span id="loader-message">Carregando</span>
-          <strong id="loader-percent">0%</strong>
-        </div>
-        <div class="loader-track">
-          <div class="loader-progress" id="loader-progress"></div>
-        </div>
+        <div class="loader-label"><span id="loader-message">Carregando</span><strong id="loader-percent">0%</strong></div>
+        <div class="loader-track"><div class="loader-progress" id="loader-progress"></div></div>
       </div>
     </section>
 
-    <main class="main-page" id="main-content">
-      <div class="main-glow glow-one" aria-hidden="true"></div>
-      <div class="main-glow glow-two" aria-hidden="true"></div>
-      <div class="main-grid" aria-hidden="true"></div>
+    <div class="site-cursor" id="site-cursor" aria-hidden="true"><span>↗</span></div>
 
-      <nav class="navigation" aria-label="Navegação principal">
-        <a class="logo" href="#inicio"><span>W/</span> WHITE</a>
-        <div class="nav-links">
-          <a class="active" href="#inicio">Início</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#contato">Contato</a>
-        </div>
-        <a class="nav-contact" href="mailto:marceloterlecki66@gmail.com">Vamos conversar</a>
-      </nav>
+    <main class="site" id="main-content">
+      <div class="utility-controls">
+        <button id="theme-toggle" type="button" aria-pressed="false">inverter</button>
+        <span>São Paulo · BR</span>
+      </div>
 
-      <section class="hero" id="inicio">
-        <div class="hero-content">
-          <p class="availability"><i></i> Disponível para novos projetos</p>
-          <p class="hero-overline">Olá, eu sou <strong>white</strong>.</p>
-          <h2>Transformo ideias em <span>experiências digitais.</span></h2>
-          <p class="hero-description">Design, tecnologia e movimento trabalhando juntos para criar produtos digitais com presença e personalidade.</p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#projetos">Ver meus projetos <span>↗</span></a>
-            <a class="secondary-action" href="mailto:marceloterlecki66@gmail.com">Entrar em contato</a>
-          </div>
-        </div>
+      <section class="portfolio-hero" id="inicio">
+        <header class="site-header">
+          <a class="wordmark" href="#inicio">white<span>.</span></a>
+          <nav aria-label="Navegação principal">
+            <a href="#arquivo">arquivo</a>
+            <a href="#sobre">sobre</a>
+            <a href="#contato">contato</a>
+          </nav>
+        </header>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="orbit orbit-large"></div>
-          <div class="orbit orbit-small"></div>
-          <div class="visual-core"><span>W</span></div>
-          <span class="visual-tag tag-one">CREATIVE</span>
-          <span class="visual-tag tag-two">DEVELOPER</span>
-          <span class="visual-number">01</span>
+        <div class="hero-symbol symbol-one" aria-hidden="true">✦</div>
+        <div class="hero-symbol symbol-two" aria-hidden="true">✣</div>
+        <p class="hero-index">INDEX / 001<br />PORTFOLIO<br />MMXXVI</p>
+        <p class="hero-note">meu arquivo pessoal de<br />projetos, ideias e coisas<br />que ainda estou criando.</p>
+
+        <div class="title-wrap">
+          <p>CRIATIVO &amp; DESENVOLVEDOR</p>
+          <h1 id="kinetic-title">WHITE<span>.</span></h1>
         </div>
 
-        <div class="scroll-note" aria-hidden="true"><span></span> Role para explorar</div>
+        <footer class="hero-footer">
+          <p>© 2026 — TODOS OS DIREITOS RESERVADOS</p>
+          <a href="#arquivo">DESÇA PARA EXPLORAR <span>↓</span></a>
+          <p>DISPONÍVEL PARA PROJETOS</p>
+        </footer>
       </section>
 
-      <section class="next-section" id="sobre">
-        <p>PRÓXIMO CAPÍTULO</p>
-        <h2>O restante do portfólio<br />será construído aqui.</h2>
+      <section class="archive" id="arquivo">
+        <header class="section-head" data-reveal>
+          <div><span>01</span><h2>arquivo</h2></div>
+          <p>Uma seleção do que estou<br />construindo e experimentando.</p>
+          <small>04 ENTRADAS</small>
+        </header>
+
+        <div class="archive-list">
+          <article class="project-row" data-cursor="abrir" data-reveal>
+            <span class="project-index">01 / ARQ_01</span>
+            <div><h3>PROJETO UM</h3><p>identidade digital e experiência web</p></div>
+            <time datetime="2026">2026</time>
+            <span class="status live">online</span>
+            <b>↗</b>
+          </article>
+          <article class="project-row" data-cursor="abrir" data-reveal>
+            <span class="project-index">02 / ARQ_02</span>
+            <div><h3>PROJETO DOIS</h3><p>produto, interface e desenvolvimento</p></div>
+            <time datetime="2026">2026</time>
+            <span class="status progress">em progresso</span>
+            <b>↗</b>
+          </article>
+          <article class="project-row" data-cursor="abrir" data-reveal>
+            <span class="project-index">03 / ARQ_03</span>
+            <div><h3>EXPERIMENTO 03</h3><p>movimento e interação criativa</p></div>
+            <time datetime="2025">2025</time>
+            <span class="status">arquivo</span>
+            <b>↗</b>
+          </article>
+          <article class="project-row" data-cursor="abrir" data-reveal>
+            <span class="project-index">04 / ARQ_04</span>
+            <div><h3>PRÓXIMA IDEIA</h3><p>alguma coisa muito boa vem aí</p></div>
+            <time datetime="2026">2026</time>
+            <span class="status soon">em breve</span>
+            <b>↗</b>
+          </article>
+        </div>
+
+        <div class="archive-art" aria-hidden="true">
+          <svg viewBox="0 0 1200 370" preserveAspectRatio="none">
+            <path d="M-50 285 C180 45 335 55 520 205 S860 370 1250 42" />
+            <path d="M-45 330 C170 115 355 90 540 230 S880 340 1240 105" />
+            <path d="M0 352 C215 205 385 185 568 282 S875 345 1200 215" />
+          </svg>
+          <span class="art-star">✦</span><span class="art-star second">✦</span><span class="art-star third">✦</span>
+        </div>
+      </section>
+
+      <section class="about" id="sobre">
+        <div class="marquee" aria-hidden="true"><div>IDEIAS · CÓDIGO · MOVIMENTO · IDEIAS · CÓDIGO · MOVIMENTO ·&nbsp;</div></div>
+        <div class="about-grid">
+          <div class="about-title" data-reveal>
+            <span>02 / SOBRE</span>
+            <h2>SOBRE<br />MIM<span>.</span></h2>
+          </div>
+          <div class="about-copy" data-reveal>
+            <p class="lead">Gosto de transformar problemas em interfaces simples, rápidas e memoráveis.</p>
+            <p>Meus projetos começam com curiosidade: uma ideia, uma necessidade ou algo que poderia funcionar melhor. É nesse espaço entre design e tecnologia que eu construo.</p>
+            <p>Este portfólio também é um experimento em andamento — cada seção vai crescer junto com os próximos projetos.</p>
+            <div class="about-meta"><span>BASE / BRASIL</span><span>FOCO / WEB</span><span>STATUS / CRIANDO</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contato">
+        <div class="contact-top"><span>03 / CONTATO</span><p>TEM UMA IDEIA?<br />VAMOS TIRÁ-LA DO PAPEL.</p></div>
+        <a class="contact-title" href="mailto:marceloterlecki66@gmail.com" data-cursor="enviar" data-reveal>VAMOS<br /><em>CONVERSAR.</em></a>
+        <div class="contact-bottom">
+          <a href="mailto:marceloterlecki66@gmail.com">marceloterlecki66@gmail.com ↗</a>
+          <a href="https://github.com/8wht" target="_blank" rel="noopener">github · 8wht ↗</a>
+          <button type="button" id="back-to-top">voltar ao topo ↑</button>
+        </div>
       </section>
     </main>
 
