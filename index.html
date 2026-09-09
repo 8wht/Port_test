@@ -3,67 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#02050b" />
-    <meta name="description" content="Portfólio criativo de white" />
+    <meta name="theme-color" content="#030711" />
+    <meta name="description" content="Portfólio de white — experiências digitais e desenvolvimento criativo." />
     <title>white — Portfólio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <main class="intro" id="intro">
-      <video id="intro-video" class="intro-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <body class="is-loading">
+    <section class="loader-screen" id="loader-screen" aria-label="Carregando portfólio">
+      <video class="loader-video" id="loader-video" autoplay muted playsinline preload="auto" aria-hidden="true">
         <source src="./shot_01.mp4" type="video/mp4" />
       </video>
-
-      <canvas id="energy-field" aria-hidden="true"></canvas>
-      <div class="color-grade" aria-hidden="true"></div>
-      <div class="vignette" aria-hidden="true"></div>
+      <div class="loader-shade" aria-hidden="true"></div>
       <div class="grain" aria-hidden="true"></div>
 
-      <header class="topbar">
-        <a class="brand" href="#" aria-label="Página inicial de white">
-          <span>W/</span> WHITE
-        </a>
-        <div class="top-meta" aria-label="Informações do portfólio">
-          <span>PORTFÓLIO PESSOAL</span>
-          <span>BR — 2026</span>
-        </div>
+      <header class="loader-header">
+        <p class="loader-brand"><span>W/</span> WHITE</p>
+        <p>PORTFÓLIO · 2026</p>
       </header>
 
-      <div class="chapter" aria-hidden="true"><span>01</span> / INTRO</div>
+      <div class="loader-copy">
+        <p class="loader-kicker"><span></span> Preparando a experiência</p>
+        <h1>Movimento<br /><em>vira ideia.</em></h1>
+      </div>
 
-      <section class="hero-copy" aria-labelledby="hero-title">
-        <p class="kicker"><i></i> DESIGN · CÓDIGO · MOVIMENTO</p>
-        <h1 id="hero-title">
-          <span>Ideias em</span>
-          <em>movimento.</em>
-        </h1>
-        <div class="hero-footer">
-          <p>Experiências digitais criadas para deixar marcas.</p>
-          <button class="enter-button" type="button" id="enter-button">
-            <span>Explorar em breve</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
-          </button>
+      <div class="loader-status" role="status" aria-live="polite">
+        <div class="loader-label">
+          <span id="loader-message">Carregando</span>
+          <strong id="loader-percent">0%</strong>
         </div>
+        <div class="loader-track">
+          <div class="loader-progress" id="loader-progress"></div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-page" id="main-content">
+      <div class="main-glow glow-one" aria-hidden="true"></div>
+      <div class="main-glow glow-two" aria-hidden="true"></div>
+      <div class="main-grid" aria-hidden="true"></div>
+
+      <nav class="navigation" aria-label="Navegação principal">
+        <a class="logo" href="#inicio"><span>W/</span> WHITE</a>
+        <div class="nav-links">
+          <a class="active" href="#inicio">Início</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <a class="nav-contact" href="mailto:marceloterlecki66@gmail.com">Vamos conversar</a>
+      </nav>
+
+      <section class="hero" id="inicio">
+        <div class="hero-content">
+          <p class="availability"><i></i> Disponível para novos projetos</p>
+          <p class="hero-overline">Olá, eu sou <strong>white</strong>.</p>
+          <h2>Transformo ideias em <span>experiências digitais.</span></h2>
+          <p class="hero-description">Design, tecnologia e movimento trabalhando juntos para criar produtos digitais com presença e personalidade.</p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#projetos">Ver meus projetos <span>↗</span></a>
+            <a class="secondary-action" href="mailto:marceloterlecki66@gmail.com">Entrar em contato</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-large"></div>
+          <div class="orbit orbit-small"></div>
+          <div class="visual-core"><span>W</span></div>
+          <span class="visual-tag tag-one">CREATIVE</span>
+          <span class="visual-tag tag-two">DEVELOPER</span>
+          <span class="visual-number">01</span>
+        </div>
+
+        <div class="scroll-note" aria-hidden="true"><span></span> Role para explorar</div>
       </section>
 
-      <div class="media-controls">
-        <button class="round-button" id="sound-button" type="button" aria-label="Ativar som" aria-pressed="false">
-          <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 9a4 4 0 0 1 0 6M17.8 6.2a8 8 0 0 1 0 11.6"/></svg>
-          <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5ZM16 9l5 6M21 9l-5 6"/></svg>
-        </button>
-        <button class="round-button" id="replay-button" type="button" aria-label="Reiniciar vídeo">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M5.5 15a7.5 7.5 0 1 0 .6-7.1L4 10"/></svg>
-        </button>
-      </div>
-
-      <div class="timeline" aria-hidden="true">
-        <span class="timeline-time" id="current-time">00:00</span>
-        <div class="timeline-track"><div class="timeline-progress" id="timeline-progress"></div></div>
-        <span class="timeline-time" id="duration">00:10</span>
-      </div>
+      <section class="next-section" id="sobre">
+        <p>PRÓXIMO CAPÍTULO</p>
+        <h2>O restante do portfólio<br />será construído aqui.</h2>
+      </section>
     </main>
 
     <noscript>Ative o JavaScript para visualizar a experiência de entrada.</noscript>
