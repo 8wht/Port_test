@@ -1,17 +1,25 @@
 const canvas = document.querySelector('#energy-field');
 const ctx = canvas.getContext('2d', { alpha: false });
+const intro = document.querySelector('#intro');
+const video = document.querySelector('#intro-video');
+const soundButton = document.querySelector('#sound-button');
+const replayButton = document.querySelector('#replay-button');
+const timelineProgress = document.querySelector('#timeline-progress');
+const currentTime = document.querySelector('#current-time');
+const durationLabel = document.querySelector('#duration');
 
 let width = 0;
 let height = 0;
 let dpr = 1;
 let startedAt = performance.now();
 let frameId;
+let stageTimer;
+let energyTimer;
+let energyActive = false;
 
 const stars = [];
 const smoke = [];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-// Pontos-guia formam a silhueta vertical da corrente de energia.
 const guide = [
   [.66, -.07], [.63, .02], [.50, .09], [.46, .16],
   [.49, .24], [.57, .34], [.55, .40], [.48, .47],
@@ -26,7 +34,7 @@ function random(seed) {
 }
 
 function resize() {
-  dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+  dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   width = window.innerWidth;
   height = window.innerHeight;
   canvas.width = Math.round(width * dpr);
@@ -40,25 +48,25 @@ function resize() {
 function createScene() {
   stars.length = 0;
   smoke.length = 0;
+  const starCount = Math.round(Math.min(210, Math.max(90, width * height / 8000)));
 
-  const starCount = Math.round(Math.min(230, Math.max(95, width * height / 7600)));
   for (let i = 0; i < starCount; i += 1) {
     stars.push({
       x: random(i + 1.1) * width,
       y: random(i + 91.7) * height,
-      radius: .35 + random(i + 27.2) * 1.15,
+      radius: .35 + random(i + 27.2) * 1.1,
       alpha: .2 + random(i + 54.8) * .72,
       speed: .5 + random(i + 304.2) * 1.8
     });
   }
 
-  for (let i = 0; i < 145; i += 1) {
+  for (let i = 0; i < 125; i += 1) {
     smoke.push({
       position: random(i + 401.3),
       side: random(i + 710.4) > .5 ? 1 : -1,
       distance: 2 + random(i + 151.1) * Math.min(width, height) * .036,
-      radius: 14 + random(i + 845.6) * 52,
-      alpha: .04 + random(i + 991.8) * .1,
+      radius: 14 + random(i + 845.6) * 50,
+      alpha: .035 + random(i + 991.8) * .08,
       phase: random(i + 66.6) * Math.PI * 2,
       drift: .35 + random(i + 12.2) * .8
     });
@@ -111,7 +119,6 @@ function drawBackground(seconds) {
 function drawSmoke(seconds) {
   ctx.save();
   ctx.globalCompositeOperation = 'lighter';
-
   for (const cloud of smoke) {
     const point = pointOnPath(cloud.position, seconds);
     const movement = Math.sin(seconds * cloud.drift + cloud.phase);
@@ -119,16 +126,14 @@ function drawSmoke(seconds) {
     const y = point.y + Math.cos(seconds * .45 + cloud.phase) * 10;
     const radius = cloud.radius * (.88 + movement * .08);
     const glow = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    glow.addColorStop(0, `rgba(83, 177, 255, ${cloud.alpha * 2.5})`);
-    glow.addColorStop(.24, `rgba(42, 125, 244, ${cloud.alpha * 1.15})`);
-    glow.addColorStop(.58, `rgba(20, 75, 181, ${cloud.alpha * .55})`);
-    glow.addColorStop(1, 'rgba(7, 31, 84, 0)');
+    glow.addColorStop(0, `rgba(83,177,255,${cloud.alpha * 2.4})`);
+    glow.addColorStop(.25, `rgba(42,125,244,${cloud.alpha})`);
+    glow.addColorStop(1, 'rgba(7,31,84,0)');
     ctx.fillStyle = glow;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
   }
-
   ctx.restore();
 }
 
@@ -152,41 +157,25 @@ function traceEnergy(seconds, variation, lineWidth, color, blur) {
 function drawEnergy(seconds) {
   ctx.save();
   ctx.globalCompositeOperation = 'lighter';
-  traceEnergy(seconds, 0, 38, 'rgba(24, 101, 255, .06)', 76);
-  traceEnergy(seconds, .18, 17, 'rgba(35, 126, 255, .16)', 42);
-  traceEnergy(seconds, .34, 6.5, 'rgba(42, 153, 255, .68)', 22);
-  traceEnergy(seconds, .48, 2.15, 'rgba(126, 218, 255, .98)', 10);
-  traceEnergy(seconds, .7, .72, 'rgba(255, 255, 255, .98)', 4);
+  traceEnergy(seconds, 0, 36, 'rgba(24,101,255,.06)', 72);
+  traceEnergy(seconds, .18, 15, 'rgba(35,126,255,.16)', 40);
+  traceEnergy(seconds, .34, 6, 'rgba(42,153,255,.68)', 21);
+  traceEnergy(seconds, .5, 2, 'rgba(126,218,255,.98)', 10);
+  traceEnergy(seconds, .7, .7, 'rgba(255,255,255,.98)', 4);
   ctx.restore();
 }
 
-function drawMeteor(seconds) {
-  const cycle = seconds % 9;
-  if (cycle > 1.35) return;
-  const progress = cycle / 1.35;
-  const startX = width * .27;
-  const startY = height * .15;
-  const x = startX + progress * width * .15;
-  const y = startY + progress * height * .15;
-  const tail = 120;
-  const gradient = ctx.createLinearGradient(x - tail, y - tail, x, y);
-  gradient.addColorStop(0, 'rgba(180, 211, 255, 0)');
-  gradient.addColorStop(1, 'rgba(220, 239, 255, .74)');
-  ctx.save();
-  ctx.globalAlpha = Math.sin(progress * Math.PI);
-  ctx.strokeStyle = gradient;
-  ctx.lineWidth = 1.2;
-  ctx.beginPath();
-  ctx.moveTo(x - tail, y - tail);
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctx.fillStyle = '#fff';
-  ctx.shadowBlur = 9;
-  ctx.shadowColor = '#9ec8ff';
-  ctx.beginPath();
-  ctx.arc(x, y, 2, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
+function formatTime(value) {
+  if (!Number.isFinite(value)) return '00:00';
+  const seconds = Math.floor(value % 60).toString().padStart(2, '0');
+  const minutes = Math.floor(value / 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
+}
+
+function updateTimeline() {
+  const progress = video.duration ? video.currentTime / video.duration : 0;
+  timelineProgress.style.width = `${progress * 100}%`;
+  currentTime.textContent = formatTime(video.currentTime);
 }
 
 function render(now) {
@@ -194,11 +183,49 @@ function render(now) {
   drawBackground(seconds);
   drawSmoke(seconds);
   drawEnergy(seconds);
-  drawMeteor(seconds);
-  if (!reducedMotion) frameId = requestAnimationFrame(render);
+  updateTimeline();
+  if (!reducedMotion && energyActive) frameId = requestAnimationFrame(render);
 }
 
-resize();
-render(performance.now());
+function beginVideoStage(restartVideo = false) {
+  window.clearTimeout(stageTimer);
+  window.clearTimeout(energyTimer);
+  cancelAnimationFrame(frameId);
+  intro.classList.remove('is-video-stage');
+  energyActive = true;
+  startedAt = performance.now();
+  if (restartVideo) video.currentTime = 0;
+  render(startedAt);
+
+  stageTimer = window.setTimeout(
+    () => intro.classList.add('is-video-stage'),
+    reducedMotion ? 50 : 1450
+  );
+  energyTimer = window.setTimeout(() => {
+    energyActive = false;
+    cancelAnimationFrame(frameId);
+  }, reducedMotion ? 100 : 3400);
+  video.play().catch(() => intro.classList.add('needs-play'));
+}
+
+soundButton.addEventListener('click', () => {
+  video.muted = !video.muted;
+  soundButton.setAttribute('aria-pressed', String(!video.muted));
+  soundButton.setAttribute('aria-label', video.muted ? 'Ativar som' : 'Desativar som');
+  video.play().catch(() => {});
+});
+
+replayButton.addEventListener('click', () => {
+  beginVideoStage(true);
+});
+
+video.addEventListener('loadedmetadata', () => {
+  durationLabel.textContent = formatTime(video.duration);
+});
+
+video.addEventListener('timeupdate', updateTimeline);
 window.addEventListener('resize', resize);
 window.addEventListener('beforeunload', () => cancelAnimationFrame(frameId));
+
+resize();
+beginVideoStage();

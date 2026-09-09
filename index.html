@@ -3,18 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#020817" />
-    <meta name="description" content="Portfólio de white" />
+    <meta name="theme-color" content="#02050b" />
+    <meta name="description" content="Portfólio criativo de white" />
     <title>white — Portfólio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <main class="intro" aria-label="Introdução do portfólio">
+    <main class="intro" id="intro">
+      <video id="intro-video" class="intro-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="./shot_01.mp4" type="video/mp4" />
+      </video>
+
       <canvas id="energy-field" aria-hidden="true"></canvas>
-      <h1 class="sr-only">Portfólio de white</h1>
+      <div class="color-grade" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Página inicial de white">
+          <span>W/</span> WHITE
+        </a>
+        <div class="top-meta" aria-label="Informações do portfólio">
+          <span>PORTFÓLIO PESSOAL</span>
+          <span>BR — 2026</span>
+        </div>
+      </header>
+
+      <div class="chapter" aria-hidden="true"><span>01</span> / INTRO</div>
+
+      <section class="hero-copy" aria-labelledby="hero-title">
+        <p class="kicker"><i></i> DESIGN · CÓDIGO · MOVIMENTO</p>
+        <h1 id="hero-title">
+          <span>Ideias em</span>
+          <em>movimento.</em>
+        </h1>
+        <div class="hero-footer">
+          <p>Experiências digitais criadas para deixar marcas.</p>
+          <button class="enter-button" type="button" id="enter-button">
+            <span>Explorar em breve</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <div class="media-controls">
+        <button class="round-button" id="sound-button" type="button" aria-label="Ativar som" aria-pressed="false">
+          <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 9a4 4 0 0 1 0 6M17.8 6.2a8 8 0 0 1 0 11.6"/></svg>
+          <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5ZM16 9l5 6M21 9l-5 6"/></svg>
+        </button>
+        <button class="round-button" id="replay-button" type="button" aria-label="Reiniciar vídeo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M5.5 15a7.5 7.5 0 1 0 .6-7.1L4 10"/></svg>
+        </button>
+      </div>
+
+      <div class="timeline" aria-hidden="true">
+        <span class="timeline-time" id="current-time">00:00</span>
+        <div class="timeline-track"><div class="timeline-progress" id="timeline-progress"></div></div>
+        <span class="timeline-time" id="duration">00:10</span>
+      </div>
     </main>
 
-    <noscript>Ative o JavaScript para visualizar a animação de entrada.</noscript>
+    <noscript>Ative o JavaScript para visualizar a experiência de entrada.</noscript>
     <script src="./script.js"></script>
   </body>
 </html>
