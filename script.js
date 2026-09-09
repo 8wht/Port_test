@@ -6,7 +6,7 @@ const loaderMessage = document.querySelector('#loader-message');
 const mainContent = document.querySelector('#main-content');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const loadingDuration = reducedMotion ? 500 : 7000;
+const loadingDuration = 7000;
 let loadingStarted = false;
 
 function easeProgress(value) {
